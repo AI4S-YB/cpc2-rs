@@ -81,14 +81,31 @@ tests for both forward-only and reverse-strand modes:
 cargo test
 ```
 
+## Performance
+
+Time comparison on the same input data and the same workload:
+
+- Input: `data/example.fa`
+- Flags: `-r --ORF --peptide`
+- Method: average wall-clock time over 50 runs on the same machine
+- Python baseline: a Python compatibility benchmark that reproduces the
+  original CPC2 standalone logic and uses the same `libsvm` model files
+
+| Version | Mean Time |
+|---------|-----------|
+| Rust (`cpc2-rs`) | 1.11 ms |
+| Python baseline | 145.75 ms |
+
+On this benchmark, `cpc2-rs` is about `131x` faster than the Python version.
+
 ## Token Usage
 
 The following token usage record corresponds to the Rust rewrite session for
 this project:
 
-| Date         | Directory  | Session   | Models    | Input   | Output | Reasoning | Cache Read | Total Tokens | Cost (USD) | Last Activity         |
-|--------------|------------|-----------|-----------|---------|--------|-----------|------------|--------------|------------|-----------------------|
-| Mar 28, 2026 | 2026/03/28 | …be777c8f | gpt-5.4   | 621,310 | 71,885 | 31,470    | 9,416,576  | 10,109,771   | $4.99      | 2026-03-28, 8:02 p.m. |
+| Models | Input | Output | Reasoning | Cache Read | Total Tokens | Cost (USD) |
+|--------|------:|-------:|----------:|-----------:|-------------:|-----------:|
+| gpt-5.4 | 621,310 | 71,885 | 31,470 | 9,416,576 | 10,109,771 | $4.99 |
 
 ## Repository Layout
 
