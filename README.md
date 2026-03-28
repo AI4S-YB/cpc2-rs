@@ -91,12 +91,37 @@ Time comparison on the same input data and the same workload:
 - Python baseline: a Python compatibility benchmark that reproduces the
   original CPC2 standalone logic and uses the same `libsvm` model files
 
+Commands used for the benchmark:
+
+```bash
+# Rust
+/usr/bin/time -f '%e' target/release/cpc2-rs \
+  -i data/example.fa \
+  -o /tmp/cpc2_rs_bench \
+  -r --ORF --peptide
+
+# Python baseline, equivalent workload in the original CPC2 standalone tree
+/usr/bin/time -f '%e' bin/CPC2_output_peptide.py \
+  -i data/example.fa \
+  -o /tmp/cpc2_py_bench \
+  -r --ORF
+```
+
 | Version | Mean Time |
 |---------|-----------|
 | Rust (`cpc2-rs`) | 1.11 ms |
 | Python baseline | 145.75 ms |
 
 On this benchmark, `cpc2-rs` is about `131x` faster than the Python version.
+
+Both commands write a tab-delimited result file with the same general shape.
+For example:
+
+```text
+#ID	transcript_length	peptide_length	Fickett_score	pI	ORF_integrity	ORF_Start	putative_peptide	coding_probability	label
+AF282387	528	176	0.47841	4.6710512161	1	1	MGAAESSMFNSLEKNSN...DQQLQQIVDKTIMEADKDGDGKLSFEEFTQMVASTDIVKQMTLEDLF	0.9975424983	coding
+Tsix_mus	4300	80	0.28464	11.7931531906	1	1643	MSELQSLWPLLFWSLRL...SVVSLHLRSFGGTFLVPLPPSLMAYLRKHIKIPRDF	0.0521965211	noncoding
+```
 
 ## Token Usage
 
@@ -111,5 +136,5 @@ this project:
 
 - `src/` Rust implementation
 - `data/` CPC2 model, scaling range, and example FASTA
-- `bin/` original Python scripts kept as reference
-- `libs/` original libsvm source archive kept as reference
+- `README.md` usage, benchmark, and token usage notes
+- `LICENSE` project license
