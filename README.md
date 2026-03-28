@@ -81,6 +81,15 @@ tests for both forward-only and reverse-strand modes:
 cargo test
 ```
 
+## Token Usage
+
+The following token usage record corresponds to the Rust rewrite session for
+this project:
+
+| Date         | Directory  | Session   | Models    | Input   | Output | Reasoning | Cache Read | Total Tokens | Cost (USD) | Last Activity         |
+|--------------|------------|-----------|-----------|---------|--------|-----------|------------|--------------|------------|-----------------------|
+| Mar 28, 2026 | 2026/03/28 | …be777c8f | gpt-5.4   | 621,310 | 71,885 | 31,470    | 9,416,576  | 10,109,771   | $4.99      | 2026-03-28, 8:02 p.m. |
+
 ## Repository Layout
 
 - `src/` Rust implementation
